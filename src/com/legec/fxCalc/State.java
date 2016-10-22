@@ -1,9 +1,9 @@
 package com.legec.fxCalc;
 
 
-public enum State {
+enum State {
     UNKNOWN,
-    ADD,
+    SUM,
     SUB,
     MUL,
     DIV,
