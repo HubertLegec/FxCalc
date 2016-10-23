@@ -31,32 +31,30 @@ public class FxCalc extends Application {
         loader.setLocation(getClass().getResource("fxcalc.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("FxCalc");
-        primaryStage.setScene(new Scene(root, 400, 400));
-        primaryStage.setMinWidth(400);
-        primaryStage.setMinHeight(400);
-        primaryStage.setMaxWidth(1500);
-        primaryStage.setMaxHeight(1500);
+        primaryStage.setScene(new Scene(root, 500, 500));
+        primaryStage.setMinWidth(500);
+        primaryStage.setMinHeight(525);
+        primaryStage.setMaxWidth(2000);
+        primaryStage.setMaxHeight(2000);
         primaryStage.show();
         initLayout();
     }
 
     private void initLayout() {
-        initFontTracking();
-        resultField.textProperty().bind(calcController.getDisplayStateProperty());
-    }
-
-    private void initFontTracking() {
         ReadOnlyDoubleProperty heightProperty = rootGrid.heightProperty();
         ReadOnlyDoubleProperty widthProperty = rootGrid.widthProperty();
 
         fontSizeTracking.bind(
                 new When(heightProperty.greaterThan(widthProperty))
-                        .then(widthProperty.divide(14))
-                        .otherwise(heightProperty.divide(14))
+                        .then(widthProperty.divide(12))
+                        .otherwise(heightProperty.divide(12))
         );
         fontSizeTracking.addListener((observable, oldValue, newValue) ->
                 rootGrid.setStyle("-fx-font-size: " + newValue.intValue())
         );
+
+        resultField.textProperty()
+                .bind(calcController.getDisplayStateProperty());
     }
 
     @FXML
